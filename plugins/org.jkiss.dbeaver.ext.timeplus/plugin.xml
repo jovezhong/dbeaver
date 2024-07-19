@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+
+<plugin>
+
+    <extension point="org.jkiss.dbeaver.generic.meta">
+        <meta id="clickhouse"
+              class="org.jkiss.dbeaver.ext.timeplus.model.TimeplusMetaModel"
+              driverClass="com.timeplus.jdbc.TimeplusDriver"
+              dialect="clickhouse"/>
+    </extension>
+
+    <extension point="org.jkiss.dbeaver.dataSourceProvider">
+        <datasource
+                class="org.jkiss.dbeaver.ext.timeplus.TimeplusDataSourceProvider"
+                description="Timeplus"
+                id="timeplus"
+                parent="generic"
+                label="Timeplus"
+                icon="platform:/plugin/org.jkiss.dbeaver.ext.generic/icons/timeplus_icon.png"
+                dialect="clickhouse">
+            <drivers managable="true">
+                
+                <driver
+                    id="timeplus_native"
+                    label="Timeplus (TCP)"
+                    class="com.timeplus.jdbc.TimeplusDriver"
+                    sampleURL="jdbc:timeplus://{host}:{port}[/{database}]"
+                    defaultPort="8463"
+                    icon="platform:/plugin/org.jkiss.dbeaver.ext.generic/icons/timeplus_icon.png"
+                    iconBig="platform:/plugin/org.jkiss.dbeaver.ext.generic/icons/timeplus_icon_big.png"
+                    description="Timplus native JDBC (over TCP)"
+                    supportedConfigurationTypes="MANUAL,URL"
+                    webURL="https://github.com/timeplus-io/timeplus-native-jdbc"
+                    databaseDocumentationSuffixURL="Timeplus"
+                    categories="sql,analytic,columns"
+                    singleConnection="true">
+                    <file type="jar" path="maven:/com.timeplus:timeplus-native-jdbc:2.0.1" load-optional-dependencies="true" bundle="!drivers.timeplus_native" />
+                    <file type="license" path="https://www.apache.org/licenses/LICENSE-2.0.txt" bundle="!drivers.timeplus_native"/>
+                    <file type="jar" path="drivers/timeplus_native" bundle="drivers.timeplus_native"/>
+                    <file type="license" path="drivers/apache_lic/LICENSE.txt" bundle="drivers.timeplus_native"/>
+                    <!-- Disable server timezone as it confuses during timestamp edit -->
+                    <property name="@dbeaver-default-dataformat.type.timestamp.pattern" value="yyyy-MM-dd HH:mm:ss[.fffffffff]"/>
+                    <property name="use_server_time_zone" value="false"/>
+                    <property name="use_time_zone" value="false"/>
+
+                    <parameter name="supports-references" value="false"/>
+                    <parameter name="supports-truncate" value="false"/>
+                    <parameter name="alter-table-add-column" value="true"/>
+                    <parameter name="supports-multi-insert" value="true"/>
+                </driver>
+
+                <driver
+                        id="proton_http"
+                        label="Timeplus (HTTP)"
+                        class="com.timeplus.proton.jdbc.ProtonDriver"
+                        sampleURL="jdbc:proton://{host}:{port}[/{database}]"
+                        defaultPort="8123"
+                        icon="platform:/plugin/org.jkiss.dbeaver.ext.generic/icons/timeplus_icon.png"
+                        iconBig="platform:/plugin/org.jkiss.dbeaver.ext.generic/icons/timeplus_icon_big.png"
+                        description="Timplus JDBC (over HTTP)"
+                        supportedConfigurationTypes="MANUAL,URL"
+                        webURL="https://github.com/timeplus-io/proton-java-driver"
+                        databaseDocumentationSuffixURL="Timeplus"
+                        categories="sql,analytic,columns"
+                        singleConnection="true">
+                            <replace provider="generic" driver="proton_http"/>
+                    <file type="jar" path="maven:/com.timeplus:proton-jdbc:0.6.0"/>
+                    <file type="license" path="https://www.apache.org/licenses/LICENSE-2.0.txt"/>
+                    <property name="@dbeaver-default-dataformat.type.timestamp.pattern" value="yyyy-MM-dd HH:mm:ss[.fffffffff]"/>
+                    <parameter name="supports-references" value="false"/>
+                    <parameter name="supports-truncate" value="false"/>
+                    <parameter name="omit-catalog" value="true"/>
+                    <parameter name="alter-table-add-column" value="true"/>
+                    <parameter name="supports-multi-insert" value="true"/>
+                </driver>
+            </drivers>
+
+        </datasource>
+    </extension>
+
+    <extension point="org.jkiss.dbeaver.sqlDialect">
+        <dialect id="timeplus" parent="generic" class="org.jkiss.dbeaver.ext.timeplus.model.TimeplusSQLDialect" label="Timeplus" description="Timeplus SQL dialect." icon="platform:/plugin/org.jkiss.dbeaver.ext.generic/icons/timeplus_icon.png">
+        </dialect>
+    </extension>
+
+    <extension point="org.jkiss.dbeaver.objectManager">
+        <manager class="org.jkiss.dbeaver.ext.timeplus.edit.TimeplusTableManager" objectType="org.jkiss.dbeaver.ext.timeplus.model.TimeplusTable"/>
+        <manager class="org.jkiss.dbeaver.ext.timeplus.edit.TimeplusViewManager" objectType="org.jkiss.dbeaver.ext.timeplus.model.TimeplusView"/>
+    </extension>
+    <extension point="org.jkiss.dbeaver.networkHandler">
+        <handler
+                type="config"
+                id="timeplus-ssl"
+                codeName="SSL"
+                label="SSL"
+                description="SSL settings"
+                secured="false"
+                desktop="false"
+                pinned="true"
+                order="100"
+                handlerClass="org.jkiss.dbeaver.ext.timeplus.model.TimeplusSSLImpl">
+            <propertyGroup label="SSL Settings">
+                <property id="ssl.ca.cert.value" label="CA Certificate" type="file" description="Choose CA certificate file" features="secured" length="MULTILINE"/>
+                <property id="ssl.client.cert.value" label="Client Certificate" type="file" description="Choose client certificate file" features="secured" length="MULTILINE"/>
+                <property id="ssl.client.key.value" label="Client Private Key" type="file" description="Choose client private key file" features="secured,password" length="MULTILINE"/>
+            </propertyGroup>
+            <propertyGroup label="Advanced Settings">
+                <property id="ssl.mode" label="SSL mode" type="string" description="Is certificate verification required" validValues="STRICT,NONE" defaultValue="STRICT"/>
+            </propertyGroup>
+            <objectType name="org.jkiss.dbeaver.ext.timeplus.TimeplusDataSourceProvider"/>
+        </handler>
+    </extension>
+    <extension point="org.jkiss.dbeaver.dataTypeProvider">
+        <provider
+                id="org.jkiss.dbeaver.ext.timeplus.model.data.TimeplusValueHandlerProvider"
+                class="org.jkiss.dbeaver.ext.timeplus.model.data.TimeplusValueHandlerProvider"
+                label="Timeplus data types provider"
+                description="Timeplus data types provider">
+
+            <datasource id="timeplus"/>
+            <type standard="ARRAY"/>
+            <type standard="STRUCT"/>
+            <type standard="DATE"/>
+            <type standard="TIME"/>
+            <type standard="TIMESTAMP"/>
+            <type name="ENUM8"/>
+            <type name="ENUM16"/>
+            <type kind="NUMERIC"/>
+            <type name="BOOL"/>
+            <type name="UUID"/>
+            <type name="IPV4"/>
+            <type name="IPV6"/>
+        </provider>
+    </extension>
+
+</plugin>

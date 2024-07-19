@@ -70,6 +70,9 @@
         <module>org.jkiss.dbeaver.ext.snowflake.core</module>
         <module>org.jkiss.dbeaver.ext.spanner</module>
         <module>org.jkiss.dbeaver.ext.sqlite</module>
+
+        <module>org.jkiss.dbeaver.ext.timeplus</module>
+
         <module>org.jkiss.dbeaver.ext.vertica</module>
         <module>org.jkiss.dbeaver.ext.teradata</module>
         <module>org.jkiss.dbeaver.ext.tidb</module>
@@ -131,6 +134,9 @@
                 <module>org.jkiss.dbeaver.ext.sqlite.ui</module>
                 <module>org.jkiss.dbeaver.ext.spanner.ui</module>
                 <module>org.jkiss.dbeaver.ext.snowflake.ui</module>
+
+                <module>org.jkiss.dbeaver.ext.timeplus.ui</module>
+
                 <module>org.jkiss.dbeaver.ext.vertica.ui</module>
                 <module>org.jkiss.dbeaver.ext.tidb.ui</module>
                 <module>org.jkiss.dbeaver.ext.altibase.ui</module>

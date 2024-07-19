@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jkiss.dbeaver.ext.clickhouse;
+package org.jkiss.dbeaver.ext.timeplus;
 
 import com.google.gson.Gson;
 import org.antlr.v4.runtime.CharStreams;
@@ -23,9 +23,9 @@ import org.jkiss.code.NotNull;
 import org.jkiss.code.Nullable;
 import org.jkiss.dbeaver.DBException;
 import org.jkiss.dbeaver.Log;
-import org.jkiss.dbeaver.ext.timeplus.ClickhouseDataTypesParser.ArrayTypeContext;
-import org.jkiss.dbeaver.ext.timeplus.ClickhouseDataTypesParser.MapTypeContext;
-import org.jkiss.dbeaver.ext.timeplus.ClickhouseDataTypesParser.TupleTypeContext;
+import org.jkiss.dbeaver.ext.timeplus.TimeplusDataTypesParser.ArrayTypeContext;
+import org.jkiss.dbeaver.ext.timeplus.TimeplusDataTypesParser.MapTypeContext;
+import org.jkiss.dbeaver.ext.timeplus.TimeplusDataTypesParser.TupleTypeContext;
 import org.jkiss.dbeaver.ext.timeplus.model.TimeplusArrayType;
 import org.jkiss.dbeaver.ext.timeplus.model.TimeplusDataSource;
 import org.jkiss.dbeaver.ext.timeplus.model.TimeplusMapType;
@@ -109,8 +109,8 @@ public class TimeplusTypeParser {
         @NotNull TimeplusDataSource dataSource,
         @NotNull String typeName
     ) throws DBException {
-        final var lexer = new ClickhouseDataTypesLexer(CharStreams.fromString(typeName));
-        final var parser = new ClickhouseDataTypesParser(new CommonTokenStream(lexer));
+        final var lexer = new TimeplusDataTypesLexer(CharStreams.fromString(typeName));
+        final var parser = new TimeplusDataTypesParser(new CommonTokenStream(lexer));
         final var type = parser.type().anyType();
 
         if (parser.getNumberOfSyntaxErrors() > 0) {
@@ -125,7 +125,7 @@ public class TimeplusTypeParser {
     public static DBSDataType getType(
         @NotNull DBRProgressMonitor monitor,
         @NotNull TimeplusDataSource dataSource,
-        @NotNull ClickhouseDataTypesParser.AnyTypeContext type
+        @NotNull TimeplusDataTypesParser.AnyTypeContext type
     ) throws DBException {
         final DBSDataType resolved;
         if (type.simpleType() != null) {
@@ -165,7 +165,7 @@ public class TimeplusTypeParser {
         final List<Pair<String, DBSDataType>> elements = new ArrayList<>();
 
         if (context.tupleElementList() != null && context.tupleElementList().tupleElement() != null) {
-            for (ClickhouseDataTypesParser.TupleElementContext element : context.tupleElementList().tupleElement()) {
+            for (TimeplusDataTypesParser.TupleElementContext element : context.tupleElementList().tupleElement()) {
                 final DBSDataType type = getType(monitor, dataSource, element.value.getText());
                 if (type == null) {
                     return null;
@@ -202,8 +202,8 @@ public class TimeplusTypeParser {
         if (!isEnum(type)) {
             return Collections.emptyMap();
         }
-        var lexer = new ClickhouseDataTypesLexer(CharStreams.fromString(type));
-        var parser = new ClickhouseDataTypesParser(new CommonTokenStream(lexer));
+        var lexer = new TimeplusDataTypesLexer(CharStreams.fromString(type));
+        var parser = new TimeplusDataTypesParser(new CommonTokenStream(lexer));
         var tree = parser.enumType();
 
         if (tree.enumEntryList() != null && tree.enumEntryList().enumEntry() != null) {

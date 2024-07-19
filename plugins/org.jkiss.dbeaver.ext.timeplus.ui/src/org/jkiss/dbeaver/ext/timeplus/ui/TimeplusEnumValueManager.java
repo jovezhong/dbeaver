@@ -16,7 +16,7 @@
  */
 package org.jkiss.dbeaver.ext.timeplus.ui;
 
-import org.jkiss.dbeaver.ext.clickhouse.model.ClickhouseTableColumn;
+import org.jkiss.dbeaver.ext.timeplus.model.TimeplusTableColumn;
 import org.jkiss.dbeaver.model.struct.DBSTypedObject;
 import org.jkiss.dbeaver.ui.data.IValueController;
 import org.jkiss.dbeaver.ui.data.managers.EnumValueManager;
@@ -32,8 +32,8 @@ public class TimeplusEnumValueManager extends EnumValueManager {
     @Override
     protected List<String> getEnumValues(IValueController controller) {
         final DBSTypedObject type = controller.getValueType();
-        if (type instanceof ClickhouseTableColumn) {
-            return List.copyOf(((ClickhouseTableColumn) type).getEnumEntries().keySet());
+        if (type instanceof TimeplusTableColumn) {
+            return List.copyOf(((TimeplusTableColumn) type).getEnumEntries().keySet());
         }
         return null;
     }

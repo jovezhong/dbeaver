@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <feature
-      id="org.jkiss.dbeaver.db.feature"
-      label="%featureName"
-      version="1.0.137.qualifier"
-      provider-name="%providerName">
+    id="org.jkiss.dbeaver.db.feature"
+    label="%featureName"
+    version="1.0.137.qualifier"
+    provider-name="%providerName"
+>
 
    <description>
       %description
@@ -13,7 +14,7 @@
       %copyright
    </copyright>
 
-   <plugin id="org.jkiss.dbeaver.ext.db2" version="0.0.0"/>
+   <plugin id="org.jkiss.dbeaver.ext.db2" version="0.0.0" />
    <plugin id="org.jkiss.dbeaver.ext.mysql" version="0.0.0" />
    <plugin id="org.jkiss.dbeaver.ext.mssql" version="0.0.0" />
    <plugin id="org.jkiss.dbeaver.ext.oracle" version="0.0.0" />
@@ -27,7 +28,7 @@
    <plugin id="org.jkiss.dbeaver.ext.db2.i" version="0.0.0" />
    <plugin id="org.jkiss.dbeaver.ext.databend" version="0.0.0" />
    <plugin id="org.jkiss.dbeaver.ext.derby" version="0.0.0" />
-   <plugin id="org.jkiss.dbeaver.ext.dameng" version="0.0.0"  />
+   <plugin id="org.jkiss.dbeaver.ext.dameng" version="0.0.0" />
    <plugin id="org.jkiss.dbeaver.ext.duckdb" version="0.0.0" />
    <plugin id="org.jkiss.dbeaver.ext.es" version="0.0.0" />
    <plugin id="org.jkiss.dbeaver.ext.exasol" version="0.0.0" />
@@ -49,17 +50,17 @@
    <plugin id="org.jkiss.dbeaver.ext.spanner" version="0.0.0" />
    <plugin id="org.jkiss.dbeaver.ext.sqlite" version="0.0.0" />
    <plugin id="org.jkiss.dbeaver.ext.teradata" version="0.0.0" />
-   <plugin id="org.jkiss.dbeaver.ext.trino" version="0.0.0"  />
+   <plugin id="org.jkiss.dbeaver.ext.trino" version="0.0.0" />
    <plugin id="org.jkiss.dbeaver.ext.vertica" version="0.0.0" />
    <plugin id="org.jkiss.dbeaver.ext.ocient" version="0.0.0" />
    <plugin id="org.jkiss.dbeaver.ext.datavirtuality" version="0.0.0" />
-   <plugin id="org.jkiss.dbeaver.ext.denodo" version="0.0.0"  />
-   <plugin id="org.jkiss.dbeaver.ext.databricks" version="0.0.0"  />
+   <plugin id="org.jkiss.dbeaver.ext.denodo" version="0.0.0" />
+   <plugin id="org.jkiss.dbeaver.ext.databricks" version="0.0.0" />
    <plugin id="org.jkiss.dbeaver.ext.altibase" version="0.0.0" />
    <plugin id="org.jkiss.dbeaver.ext.gaussdb" version="0.0.0" />
+   <plugin id="org.jkiss.dbeaver.ext.timeplus" version="0.0.0" />
 
-   <plugin id="com.dbeaver.rpc" version="0.0.0"/>
-   <plugin id="com.dbeaver.jdbc.api" version="0.0.0"/>
-   <plugin id="com.dbeaver.jdbc.driver.libsql" version="0.0.0"/>
-
+   <plugin id="com.dbeaver.rpc" version="0.0.0" />
+   <plugin id="com.dbeaver.jdbc.api" version="0.0.0" />
+   <plugin id="com.dbeaver.jdbc.driver.libsql" version="0.0.0" />
 </feature>

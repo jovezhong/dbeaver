@@ -26,7 +26,7 @@
                     label="Timeplus (TCP)"
                     class="com.timeplus.jdbc.TimeplusDriver"
                     sampleURL="jdbc:timeplus://{host}:{port}[/{database}]"
-                    defaultPort="8463"
+                    defaultPort="7587"
                     icon="platform:/plugin/org.jkiss.dbeaver.ext.generic/icons/timeplus_icon.png"
                     iconBig="platform:/plugin/org.jkiss.dbeaver.ext.generic/icons/timeplus_icon_big.png"
                     description="Timeplus native JDBC (over TCP)"

@@ -35,7 +35,7 @@
                     databaseDocumentationSuffixURL="Timeplus"
                     categories="sql,analytic,columns"
                     singleConnection="true">
-                    <file type="jar" path="maven:/com.timeplus:timeplus-native-jdbc:2.0.4" load-optional-dependencies="true" bundle="!drivers.timeplus_native" />
+                    <file type="jar" path="maven:/com.timeplus:timeplus-native-jdbc:2.0.7" load-optional-dependencies="true" bundle="!drivers.timeplus_native" />
                     <file type="license" path="https://www.apache.org/licenses/LICENSE-2.0.txt" bundle="!drivers.timeplus_native"/>
                     <file type="jar" path="drivers/timeplus_native" bundle="drivers.timeplus_native"/>
                     <file type="license" path="drivers/apache_lic/LICENSE.txt" bundle="drivers.timeplus_native"/>
